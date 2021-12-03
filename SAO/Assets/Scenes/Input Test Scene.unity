@@ -528,8 +528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761647776561641388fc51919acedfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  batteryAnim: {fileID: 0}
   animTime: 0
+  TMProObj: {fileID: 1830028841}
 --- !u!1 &2021149721
 GameObject:
   m_ObjectHideFlags: 0
