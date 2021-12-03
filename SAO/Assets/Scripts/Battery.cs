@@ -28,6 +28,8 @@ public class Battery : MonoBehaviour
 
         // Spawn the correct number or orbs
         OrbSpawner();
+
+        StartCoroutine(BatteryUp());
     }
 
     // Update is called once per frame
@@ -39,7 +41,6 @@ public class Battery : MonoBehaviour
 
         // Change the battery text
         mText.text = gVar.batteryPercentage.ToString();
-        
     }
 
     private void OrbSpawner()
@@ -81,5 +82,17 @@ public class Battery : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator BatteryUp()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (gVar.connectedToAnything == false && gVar.batteryPercentage < 100)
+        {
+            gVar.batteryPercentage++;
+        }
+
+        StartCoroutine(BatteryUp());
     }
 }
