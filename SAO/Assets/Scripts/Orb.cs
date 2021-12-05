@@ -32,23 +32,4 @@ public class Orb : MonoBehaviour
     {
         colliderHit.enabled = false;
     }
-
-    // FAILED ATTEMPT
-    /*
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Device"))
-        {
-            col.gameObject.SendMessage("Connected");
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.CompareTag("Device"))
-        {
-            col.gameObject.SendMessage("Disconnected");
-        }
-    }
-    */
 }

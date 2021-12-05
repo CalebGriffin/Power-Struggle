@@ -17,23 +17,6 @@ public class TouchInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // FAILED ATTEMPT
-        /*foreach(Touch touch in Input.touches)
-        {
-            if (touch.phase == TouchPhase.Began)
-            {
-                // Shoot a ray from the current touch coorditnaets
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Orb")
-                {
-                    pos = hit.point;
-                    //hit.collider.gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(touch.position.x, 0f, touch.position.y));
-                    //hit.collider.gameObject.GetComponent<LineRenderer>().SetPosition(1, hit.collider.gameObject.transform.position + new Vector3(pos.x, 0.1f, pos.z + 4.2f));
-                    hit.collider.gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(pos.x, 0.1f, pos.z));
-                }
-            }
-        }*/
-
         if (Input.touches != null)
         {
             Touch touch = Input.touches[0];
