@@ -6320,7 +6320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TMProObj: {fileID: 1830028841}
-  orbNum: 3
+  orbNum: 4
   orbPrefab: {fileID: 3112641286196802751, guid: a8d5a6623fbc94e1a870ee09b4e43a39,
     type: 3}
   connectedOrbs: 0
