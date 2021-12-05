@@ -17,6 +17,7 @@ public class TouchInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // FAILED ATTEMPT
         /*foreach(Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
@@ -45,6 +46,7 @@ public class TouchInput : MonoBehaviour
                 {
                     pos = hit.point;
                     currentOrb = hit.collider.gameObject;
+                    currentOrb.SendMessage("BoxOff");
                     hit.collider.gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(pos.x, 0.1f, pos.z));
                 }
             }
@@ -60,6 +62,7 @@ public class TouchInput : MonoBehaviour
                     if (currentOrb != null)
                     {
                         currentOrb.GetComponent<LineRenderer>().SetPosition(1, new Vector3(pos.x, 0.1f, pos.z));
+                        currentOrb.SendMessage("BoxOff");
                     }
                 }
             }
@@ -73,6 +76,7 @@ public class TouchInput : MonoBehaviour
                     if (currentOrb != null)
                     {
                         currentOrb.GetComponent<LineRenderer>().SetPosition(1, new Vector3(hit.transform.position.x, 0.1f, hit.transform.position.z));
+                        currentOrb.SendMessage("BoxOn");
                         currentOrb = null;
                     }
                 }
@@ -81,6 +85,7 @@ public class TouchInput : MonoBehaviour
                     if (currentOrb != null)
                     {
                         currentOrb.GetComponent<LineRenderer>().SetPosition(1, new Vector3(currentOrb.transform.position.x, 0.1f, currentOrb.transform.position.z));
+                        currentOrb.SendMessage("BoxOff");
                         currentOrb = null;
                     }
                 }

@@ -22,4 +22,33 @@ public class Orb : MonoBehaviour
         Vector3 worldPos = transform.InverseTransformPoint(lr.GetPosition(1));
         colliderHit.center = worldPos;
     }
+
+    public void BoxOn()
+    {
+        colliderHit.enabled = true;
+    }
+
+    public void BoxOff()
+    {
+        colliderHit.enabled = false;
+    }
+
+    // FAILED ATTEMPT
+    /*
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Device"))
+        {
+            col.gameObject.SendMessage("Connected");
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("Device"))
+        {
+            col.gameObject.SendMessage("Disconnected");
+        }
+    }
+    */
 }

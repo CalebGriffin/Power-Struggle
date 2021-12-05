@@ -19,6 +19,11 @@ public class Battery : MonoBehaviour
 
     private GameObject tempClone;
 
+    private GameObject[] orbs;
+
+    // Only serialized for testing, REMOVE
+    [SerializeField] private int connectedOrbs;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,10 @@ public class Battery : MonoBehaviour
         // Spawn the correct number or orbs
         OrbSpawner();
 
+        // Gets the orbs in the scene for reference
+        GetOrbs();
+
+        // Starts the coroutine which increases the battery
         StartCoroutine(BatteryUp());
     }
 
@@ -41,6 +50,28 @@ public class Battery : MonoBehaviour
 
         // Change the battery text
         mText.text = gVar.batteryPercentage.ToString();
+    }
+
+    void FixedUpdate()
+    {
+        foreach (GameObject orb in orbs)
+        {
+            if (Vector3.Distance(orb.GetComponent<LineRenderer>().GetPosition(1), orb.transform.position) > 0.2)
+            {
+                connectedOrbs++;
+            }
+        }
+        
+        if (connectedOrbs > 0)
+        {
+            gVar.connectedToAnything = true;
+        }
+        else
+        {
+            gVar.connectedToAnything = false;
+        }
+
+        connectedOrbs = 0;
     }
 
     private void OrbSpawner()
@@ -82,6 +113,11 @@ public class Battery : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void GetOrbs()
+    {
+        orbs = GameObject.FindGameObjectsWithTag("Orb");
     }
 
     private IEnumerator BatteryUp()
