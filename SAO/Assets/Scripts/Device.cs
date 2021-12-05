@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Device : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class Device : MonoBehaviour
     [SerializeField] private LayerMask orbLayer;
     [SerializeField] private LayerMask badOrbLayer;
 
+    [SerializeField] private TextMeshProUGUI mText; 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(PowerUp());
     }
 
     // Update is called once per frame
@@ -40,5 +43,27 @@ public class Device : MonoBehaviour
 
         Collider[] hitBadColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, badOrbLayer);
         badConnectedNum = hitBadColliders.Length;
+    }
+
+    IEnumerator PowerUp()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (gVar.batteryPercentage > powerRate * connectedNum)
+        {
+            currentVal += powerRate * connectedNum;
+            gVar.batteryPercentage -= powerRate * connectedNum;
+        }
+
+        
+        if (bVar.batteryPercentage > powerRate * badConnectedNum)
+        {
+            currentVal -= powerRate * badConnectedNum;
+            bVar.batteryPercentage -= powerRate * badConnectedNum;
+        }
+
+        mText.text = currentVal.ToString();
+
+        StartCoroutine(PowerUp());
     }
 }
