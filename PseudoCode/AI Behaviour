@@ -1,0 +1,43 @@
+PseudoCode for AI Behaviour
+
+Get reference to all of the orbs
+
+Get reference to all of the devices
+
+On First Frame()
+{
+    Run Set difficulty variables()
+}
+
+[Coroutine]
+Decide what to do()
+{
+    wait for x seconds
+
+    Sort the array based on current power (To get the one's where the AI is winning/losing)
+
+    Run Decide what to do()
+}
+
+Set difficulty variables()
+{
+    if (easy)
+    {
+        x seconds is higher
+        attack threshold is higher
+        defense threshold is lower
+    }
+    else if (medium)
+    {
+        x seconds is medium
+        attack threshold is medium
+        defense threshold is medium
+    }
+    else if (hard)
+    {
+        x seconds is lower
+        attack threshold is lower
+        defense threshold is higher
+    }
+
+}
