@@ -7,9 +7,9 @@ public class Device : MonoBehaviour
 {
     [SerializeField] private int maxVal;
 
-    [SerializeField] private int currentVal;
+    public int currentVal;
 
-    [SerializeField] private int powerRate;
+    public int powerRate;
     
     // Only serialized for testing, REMOVE
     [SerializeField] private int connectedNum;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2261,6 +2261,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607528994}
   m_Mesh: {fileID: 2534964839176971238, guid: 3684d36b11567454e8f5c44a67d36ab3, type: 3}
+--- !u!1 &615336066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 615336068}
+  - component: {fileID: 615336067}
+  m_Layer: 0
+  m_Name: AI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &615336067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615336066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10990e5d11be242b887618c0e92669d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbs: []
+  devices: []
+  decisionTime: 0
+  attackThreshold: 0
+  doubleAttackThreshold: 0
+  defenseThreshold: 0
+  doubleDefenseThreshold: 0
+  difficultyLevel: 0
+--- !u!4 &615336068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615336066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.3766503, y: 0.59288883, z: 0.3160529}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &634566675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,7 +2592,7 @@ MonoBehaviour:
   badOrbLayer:
     serializedVersion: 2
     m_Bits: 128
-  mText: {fileID: 0}
+  mText: {fileID: 331622961}
 --- !u!65 &666785525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5735,7 +5786,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727019776}
-  m_LocalRotation: {x: -0.19107856, y: -0.36872572, z: -0.0777346, w: 0.9063596}
+  m_LocalRotation: {x: -0.19107859, y: -0.36872554, z: -0.07773457, w: 0.9063597}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Orb
   - Device
+  - BadOrb
   layers:
   - Default
   - TransparentFX
