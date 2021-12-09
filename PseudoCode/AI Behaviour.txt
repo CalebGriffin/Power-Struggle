@@ -15,8 +15,102 @@ Decide what to do()
     wait for x seconds
 
     Sort the array based on current power (To get the one's where the AI is winning/losing)
+    
+    totalPower = Adds all current power values
+
+    if (totalPower > attack threshold)
+    {
+        Decide to Attack()
+    }
+    else if (totalPower > defense threshold)
+    {
+        Decide to Defend()
+    }
+    else
+    {
+        Decide to Attack then Defend()
+    }
+
+    If the AI has at least 2 orbs
+    {
+        If the first device in the array is above the double attack threshold
+        {
+            Double attack the first device
+        }
+    }
 
     Run Decide what to do()
+}
+
+Attack(bool checkedOutput)
+{
+    orbsAssigned = 0
+
+    if (checkedOutput is true)
+    {
+        totalOutput is 0
+    }
+    
+    while (allOrbs.length - orbsAssigned > 0)
+    {
+        foreach (device in the device array)
+        {
+            if (allOrbs.length - orbsAssigned = 0)
+            {
+                break out of the foreach loop
+            }
+
+            Get the current device in the array
+
+            if (devices power > double attack threshold AND (allOrbs.length - orbsAssigned) > 1)
+            {
+                orbsAssigned += 2
+
+                if (checkedOutput is true)
+                {
+                    connect orbs[orbsAssigned - 1]
+                    connect orbs[orbsAssigned]
+                }
+                else
+                {
+                    totalOutput += Get powerRate of device * 2 
+                }
+
+            }
+            else
+            {
+                if (checkedOutput is true)
+                {
+                    connect orbs[orbsAssigned]
+                }
+                else
+                {
+                    totalOutput += Get powerRate of device 
+                }
+
+                orbsAssigned += 1
+            }
+        }
+    }
+
+    if (totalOutput > current AI battery percentage)
+    {
+        Set the state to recharge
+    }
+    else if (checkedOutput is false)
+    {
+        Attack(true)
+    }
+}
+
+Defend(bool checkedOutput)
+{
+    // same as Attack() but with reversed device array
+}
+
+Attack then Defend(bool checkedOutput)
+{
+    // alternate between getting the first and last element in the device array
 }
 
 Set difficulty variables()
@@ -25,18 +119,24 @@ Set difficulty variables()
     {
         x seconds is higher
         attack threshold is higher
+        double attack threshold is higher
         defense threshold is lower
+        double defense threshold is lower
     }
     else if (medium)
     {
         x seconds is medium
         attack threshold is medium
+        double attack threshold is medium
         defense threshold is medium
+        double defense threshold is medium
     }
     else if (hard)
     {
         x seconds is lower
         attack threshold is lower
+        doulbe attack threshold is lower
         defense threshold is higher
+        double defense threshold is higher
     }
 }
