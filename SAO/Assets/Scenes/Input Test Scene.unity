@@ -811,7 +811,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167970972}
-  m_LocalRotation: {x: -0.35527003, y: 0.1998719, z: 0.0780483, w: 0.90980375}
+  m_LocalRotation: {x: -0.35831243, y: 0.1996097, z: 0.07871662, w: 0.9086099}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -821,7 +821,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -44.531, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 1.9}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1183024399 &167970974
@@ -2292,6 +2292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbs: []
   devices: []
+  aiBattery: {fileID: 1863808103}
   decisionTime: 0
   attackThreshold: 0
   doubleAttackThreshold: 0
@@ -5026,7 +5027,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440181764}
-  m_LocalRotation: {x: -0.21304214, y: 0.092098035, z: 0.020175759, w: 0.9724834}
+  m_LocalRotation: {x: -0.220275, y: 0.09194528, z: 0.020860998, w: 0.9708707}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5036,7 +5037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -44.531, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.8}
+  m_AnchoredPosition: {x: 0, y: 1.5}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1183024399 &1440181766
@@ -5465,9 +5466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0
-
-'
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de508f944e9e28341ab42c0449c00822, type: 2}
   m_sharedMaterial: {fileID: -181506160746843066, guid: de508f944e9e28341ab42c0449c00822,
@@ -5921,7 +5920,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727019776}
-  m_LocalRotation: {x: -0.19107859, y: -0.36872554, z: -0.07773457, w: 0.9063597}
+  m_LocalRotation: {x: -0.20003633, y: -0.36793846, z: -0.081378855, w: 0.90442485}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5931,7 +5930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -44.531, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 1.6}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1183024399 &1727019778
@@ -6607,8 +6606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761647776561641388fc51919acedfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfOrbs: 3
   TMProObj: {fileID: 1830028841}
-  orbNum: 4
   orbPrefab: {fileID: 3112641286196802751, guid: a8d5a6623fbc94e1a870ee09b4e43a39,
     type: 3}
   connectedOrbs: 0
@@ -6802,10 +6801,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c5a507689894b4896d8b31a517816c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfOrbs: 3
   TMProObj: {fileID: 622712010}
-  orbNum: 4
   orbPrefab: {fileID: 5648382514327947495, guid: be7ef900f7cc64cca9d10524a3b6e4d3,
     type: 3}
+  orbs: []
   connectedOrbs: 0
 --- !u!95 &1863808105
 Animator:

@@ -5,6 +5,16 @@ using TMPro;
 
 public class Battery : MonoBehaviour
 {
+    public enum NumberOfOrbs
+    {
+        One,
+        Two,
+        Three,
+        Four
+    };
+
+    public NumberOfOrbs numberOfOrbs;
+
     private Animator batteryAnim;
 
     private float animTime;
@@ -12,8 +22,6 @@ public class Battery : MonoBehaviour
     [SerializeField] private GameObject TMProObj;
 
     private TextMeshProUGUI mText;
-
-    [SerializeField] private int orbNum;
 
     [SerializeField] private GameObject orbPrefab;
 
@@ -76,21 +84,21 @@ public class Battery : MonoBehaviour
 
     private void OrbSpawner()
     {
-        switch(orbNum)
+        switch(numberOfOrbs)
         {
-            case 1:
+            case NumberOfOrbs.One:
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, 0f); 
                 break;
             
-            case 2:
+            case NumberOfOrbs.Two:
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, 0.6f); 
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, -0.6f); 
                 break;
             
-            case 3:
+            case NumberOfOrbs.Three:
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, 0f); 
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
@@ -99,7 +107,7 @@ public class Battery : MonoBehaviour
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, -1.1f); 
                 break;
 
-            case 4:
+            case NumberOfOrbs.Four:
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);
                 tempClone.transform.localPosition = new Vector3(1.8f, 0f, 1.8f); 
                 tempClone = Instantiate(orbPrefab, transform.position, Quaternion.identity, this.gameObject.transform);

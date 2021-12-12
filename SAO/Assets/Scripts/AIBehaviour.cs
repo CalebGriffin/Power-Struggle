@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class AIBehaviour : MonoBehaviour
     // Only Serialized for testing // REMOVE
     [SerializeField] private GameObject[] orbs; // An array of GameObjects that store all of the orbs that the AI has
     [SerializeField] private GameObject[] devices; // An array of GameObjects that store all of the devices in the level
+
+    [SerializeField] private GameObject aiBattery; // The aiBattery object for the AI
 
     // Only Serialized for testing // REMOVE
     [SerializeField] private float decisionTime; // Time waited before each AI decision
@@ -21,14 +24,19 @@ public class AIBehaviour : MonoBehaviour
     private int orbsAssigned; // Used to keep track of how many orbs have been used each decision
     private int totalOutput; // How much output will the AI make on the next turn
 
+    private IDictionary<int, GameObject> orbsToConnect = new Dictionary<int, GameObject>(); // Gets reference to each orb and which device it should be connected to
+
     // Start is called before the first frame update
     void Start()
     {
         // Runs the function to set the difficulty of the AI
         SetDifficulty();
+    }
 
+    void Awake()
+    {
         // Gets the Orbs and the Devices in the scene and adds them to their arrays
-        GetDevicesAndOrbs();
+        StartCoroutine(GetDevicesAndOrbs());
 
         // Starts the coroutine which controls the decisions the AI makes
         StartCoroutine(Decision());
@@ -46,17 +54,14 @@ public class AIBehaviour : MonoBehaviour
 
         Recharge();
 
+        // Sorts the device array from smallest to largest based on it's current value
         devices = devices.OrderBy(go => go.GetComponent<Device>().currentVal).ToArray();
 
         int totalPower = 0;
-        // Just used for testing // REMOVE
-        int i = 0;
+
+        // Calculates whether the player or the AI is winning based on current device values
         foreach(GameObject device in devices)
         {
-            // Just used for testing // REMOVE
-            //Debug.Log(i + ": " + devices[i].ToString());
-            i++;
-
             totalPower += device.GetComponent<Device>().currentVal;
         }
 
@@ -79,9 +84,11 @@ public class AIBehaviour : MonoBehaviour
     private void Attack(bool checkedOutput)
     {
         Debug.Log("AI Decided to Attack!");
+        Debug.Log("Checked Output is " + checkedOutput.ToString());
 
         orbsAssigned = 0;
         totalOutput = 0;
+        orbsToConnect.Clear();
         
         foreach(GameObject device in devices)
         {
@@ -96,8 +103,11 @@ public class AIBehaviour : MonoBehaviour
 
                 if (checkedOutput == true)
                 {
-                    orbs[orbsAssigned - 2].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
-                    orbs[orbsAssigned - 1].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
+                    Debug.Log("Getting Here");
+
+                    orbsToConnect.Add((orbsAssigned - 2), device);
+
+                    orbsToConnect.Add((orbsAssigned - 1), device);
                 }
                 else
                 {
@@ -110,8 +120,9 @@ public class AIBehaviour : MonoBehaviour
 
                 if (checkedOutput == true)
                 {
-                    orbs[orbsAssigned - 1].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
+                    Debug.Log("Getting Here");
 
+                    orbsToConnect.Add((orbsAssigned - 1), device);
                 }
                 else
                 {
@@ -127,6 +138,11 @@ public class AIBehaviour : MonoBehaviour
         else if (checkedOutput == false)
         {
             Attack(true);
+        }
+
+        if (checkedOutput)
+        {
+            StartCoroutine(Connect());
         }
     }
 
@@ -148,6 +164,18 @@ public class AIBehaviour : MonoBehaviour
         }
     }
 
+    IEnumerator Connect()
+    {
+        foreach(KeyValuePair<int, GameObject> kvp in orbsToConnect)
+        {
+            Debug.Log("Connecting Orb: " + kvp.Key + " to GameObject: " + kvp.Value.ToString());
+
+            orbs[kvp.Key].GetComponent<LineRenderer>().SetPosition(1, new Vector3(kvp.Value.transform.position.x, 0.1f, kvp.Value.transform.position.z));
+
+            yield return new WaitForSeconds(bVar.connectWaitTime);
+        }
+    }
+
     // This gives me 3 different fixed options for what the difficulty can be and shows as a dropdown menu in the inspector
     public enum DifficultyLevel
     {
@@ -162,6 +190,9 @@ public class AIBehaviour : MonoBehaviour
         {
             case DifficultyLevel.Easy:
                 decisionTime = 5f;
+                bVar.batteryUpWaitTime = 1f;
+                bVar.connectWaitTime = 0.8f;
+
                 attackThreshold = -10;
                 doubleAttackThreshold = -20;
                 defenseThreshold = 10;
@@ -170,6 +201,7 @@ public class AIBehaviour : MonoBehaviour
 
             case DifficultyLevel.Medium:
                 decisionTime = 3f;
+
                 attackThreshold = -8;
                 doubleAttackThreshold = -16;
                 defenseThreshold = 8;
@@ -186,8 +218,10 @@ public class AIBehaviour : MonoBehaviour
         }
     }
 
-    private void GetDevicesAndOrbs()
+    private IEnumerator GetDevicesAndOrbs()
     {
+        yield return new WaitForSeconds(0.01f);
+
         orbs = GameObject.FindGameObjectsWithTag("BadOrb");
 
         devices = GameObject.FindGameObjectsWithTag("Device");
