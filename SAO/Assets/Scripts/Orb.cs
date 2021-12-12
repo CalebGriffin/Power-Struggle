@@ -23,6 +23,11 @@ public class Orb : MonoBehaviour
         colliderHit.center = worldPos;
     }
 
+    public void Reset()
+    {
+        lr.SetPosition(1, transform.position);
+    }
+
     public void BoxOn()
     {
         colliderHit.enabled = true;

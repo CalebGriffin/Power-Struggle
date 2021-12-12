@@ -17,7 +17,7 @@ public class TouchInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touches != null)
+        if (Input.touches.Length > 0)
         {
             Touch touch = Input.touches[0];
             if (touch.phase == TouchPhase.Began)

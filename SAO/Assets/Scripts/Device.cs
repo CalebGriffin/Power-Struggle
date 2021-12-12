@@ -43,6 +43,7 @@ public class Device : MonoBehaviour
 
         Collider[] hitBadColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, badOrbLayer);
         badConnectedNum = hitBadColliders.Length;
+        Debug.Log("Bad Connected Num: " + badConnectedNum.ToString());
     }
 
     IEnumerator PowerUp()

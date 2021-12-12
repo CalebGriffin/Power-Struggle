@@ -18,6 +18,9 @@ public class AIBehaviour : MonoBehaviour
 
     [SerializeField] private DifficultyLevel difficultyLevel; // The difficulty level can be set in the inspector for each level
 
+    private int orbsAssigned; // Used to keep track of how many orbs have been used each decision
+    private int totalOutput; // How much output will the AI make on the next turn
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +44,19 @@ public class AIBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(decisionTime);
 
+        Recharge();
+
         devices = devices.OrderBy(go => go.GetComponent<Device>().currentVal).ToArray();
 
         int totalPower = 0;
+        // Just used for testing // REMOVE
+        int i = 0;
         foreach(GameObject device in devices)
         {
+            // Just used for testing // REMOVE
+            //Debug.Log(i + ": " + devices[i].ToString());
+            i++;
+
             totalPower += device.GetComponent<Device>().currentVal;
         }
 
@@ -68,6 +79,55 @@ public class AIBehaviour : MonoBehaviour
     private void Attack(bool checkedOutput)
     {
         Debug.Log("AI Decided to Attack!");
+
+        orbsAssigned = 0;
+        totalOutput = 0;
+        
+        foreach(GameObject device in devices)
+        {
+            if (orbs.Length - orbsAssigned == 0)
+            {
+                break;
+            }
+
+            if (device.GetComponent<Device>().currentVal > doubleAttackThreshold && orbs.Length - orbsAssigned > 1)
+            {
+                orbsAssigned += 2;
+
+                if (checkedOutput == true)
+                {
+                    orbs[orbsAssigned - 2].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
+                    orbs[orbsAssigned - 1].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
+                }
+                else
+                {
+                    totalOutput += device.GetComponent<Device>().powerRate * 2;
+                }
+            }
+            else
+            {
+                orbsAssigned += 1;
+
+                if (checkedOutput == true)
+                {
+                    orbs[orbsAssigned - 1].GetComponent<LineRenderer>().SetPosition(1, new Vector3(device.transform.position.x, 0.1f, device.transform.position.z));
+
+                }
+                else
+                {
+                    totalOutput += device.GetComponent<Device>().powerRate;
+                }
+            }
+        }
+        
+        if (totalOutput > bVar.batteryPercentage)
+        {
+            Recharge();
+        }
+        else if (checkedOutput == false)
+        {
+            Attack(true);
+        }
     }
 
     private void Defend(bool checkedOutput)
@@ -82,7 +142,10 @@ public class AIBehaviour : MonoBehaviour
 
     private void Recharge()
     {
-
+        foreach (GameObject orb in orbs)
+        {
+            orb.SendMessage("Reset");
+        }
     }
 
     // This gives me 3 different fixed options for what the difficulty can be and shows as a dropdown menu in the inspector
@@ -98,7 +161,7 @@ public class AIBehaviour : MonoBehaviour
         switch(difficultyLevel)
         {
             case DifficultyLevel.Easy:
-                decisionTime = 3f;
+                decisionTime = 5f;
                 attackThreshold = -10;
                 doubleAttackThreshold = -20;
                 defenseThreshold = 10;
@@ -106,7 +169,7 @@ public class AIBehaviour : MonoBehaviour
                 break;
 
             case DifficultyLevel.Medium:
-                decisionTime = 2f;
+                decisionTime = 3f;
                 attackThreshold = -8;
                 doubleAttackThreshold = -16;
                 defenseThreshold = 8;
@@ -114,7 +177,7 @@ public class AIBehaviour : MonoBehaviour
                 break;
 
             case DifficultyLevel.Hard:
-                decisionTime = 1f;
+                decisionTime = 2f;
                 attackThreshold = -6;
                 doubleAttackThreshold = -12;
                 defenseThreshold = 6;

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class bVar
 {
-    public static int batteryPercentage = 1;
+    public static int batteryPercentage = 100;
     public static bool connectedToAnything = false;
 }
