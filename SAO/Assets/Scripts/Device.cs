@@ -23,9 +23,15 @@ public class Device : MonoBehaviour
     private Color greenColour = new Color(0.1058824f, 1f, 0.03529412f, 1f);
     private Color redColour = new Color(1f, 0.1960784f, 0.09019608f, 1f);
 
+    private Animator deviceAnim;
+    private float animationTime;
+    private string animationName;
+
     // Start is called before the first frame update
     void Start()
     {
+        AnimationSetup();
+
         StartCoroutine(PowerUp());
     }
 
@@ -37,6 +43,8 @@ public class Device : MonoBehaviour
     void FixedUpdate()
     {
         GetCollisions();
+
+        AnimationUpdater();
     }
 
     void GetCollisions()
@@ -86,6 +94,37 @@ public class Device : MonoBehaviour
         else
         {
             mText.color = whiteColour;
+        }
+    }
+
+    private void AnimationUpdater()
+    {
+        if (connectedNum > 0 || badConnectedNum > 0)
+        {
+            animationTime += Time.deltaTime;
+            deviceAnim.speed = 1;
+            deviceAnim.Play(animationName, 0, animationTime);
+        }
+        else
+        {
+            animationTime = 0;
+            deviceAnim.speed = 0;
+            deviceAnim.Play(animationName, 0, 0);
+        }
+    }
+
+    private void AnimationSetup()
+    {
+        deviceAnim = GetComponent<Animator>();
+        string deviceName = this.gameObject.ToString();
+        switch (deviceName)
+        {
+            case "Camera":
+                animationName = "GrowNShrink";
+                break;
+
+            default:
+                break;
         }
     }
 }

@@ -23,6 +23,8 @@ public class Battery : MonoBehaviour
 
     private TextMeshProUGUI mText;
 
+    [SerializeField] private GameObject rechargeCanvas;
+
     [SerializeField] private GameObject orbPrefab;
 
     private GameObject tempClone;
@@ -73,10 +75,12 @@ public class Battery : MonoBehaviour
         if (connectedOrbs > 0)
         {
             gVar.connectedToAnything = true;
+            rechargeCanvas.SetActive(true);
         }
         else
         {
             gVar.connectedToAnything = false;
+            rechargeCanvas.SetActive(false);
         }
 
         connectedOrbs = 0;
@@ -138,5 +142,13 @@ public class Battery : MonoBehaviour
         }
 
         StartCoroutine(BatteryUp());
+    }
+
+    public void ResetOrbs()
+    {
+        foreach (GameObject orb in orbs)
+        {
+            orb.SendMessage("Reset");
+        }
     }
 }

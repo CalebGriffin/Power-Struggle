@@ -149,6 +149,68 @@ public class AIBehaviour : MonoBehaviour
     private void Defend(bool checkedOutput)
     {
         Debug.Log("AI Decided to Defend!");
+        Debug.Log("Checked Output is " + checkedOutput.ToString());
+
+        orbsAssigned = 0;
+        totalOutput = 0;
+        orbsToConnect.Clear();
+
+        System.Array.Reverse(devices);
+        
+        foreach(GameObject device in devices)
+        {
+            if (orbs.Length - orbsAssigned == 0)
+            {
+                break;
+            }
+
+            if (device.GetComponent<Device>().currentVal > doubleDefenseThreshold && orbs.Length - orbsAssigned > 1)
+            {
+                orbsAssigned += 2;
+
+                if (checkedOutput == true)
+                {
+                    Debug.Log("Getting Here");
+
+                    orbsToConnect.Add((orbsAssigned - 2), device);
+
+                    orbsToConnect.Add((orbsAssigned - 1), device);
+                }
+                else
+                {
+                    totalOutput += device.GetComponent<Device>().powerRate * 2;
+                }
+            }
+            else
+            {
+                orbsAssigned += 1;
+
+                if (checkedOutput == true)
+                {
+                    Debug.Log("Getting Here");
+
+                    orbsToConnect.Add((orbsAssigned - 1), device);
+                }
+                else
+                {
+                    totalOutput += device.GetComponent<Device>().powerRate;
+                }
+            }
+        }
+        
+        if (totalOutput > bVar.batteryPercentage)
+        {
+            Recharge();
+        }
+        else if (checkedOutput == false)
+        {
+            Defend(true);
+        }
+
+        if (checkedOutput)
+        {
+            StartCoroutine(Connect());
+        }
     }
 
     private void AttackNDefend(bool checkedOutput)
