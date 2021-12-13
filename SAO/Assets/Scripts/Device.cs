@@ -19,6 +19,9 @@ public class Device : MonoBehaviour
     [SerializeField] private LayerMask badOrbLayer;
 
     [SerializeField] private TextMeshProUGUI mText; 
+    private Color whiteColour = Color.white;
+    private Color greenColour = new Color(0.1058824f, 1f, 0.03529412f, 1f);
+    private Color redColour = new Color(1f, 0.1960784f, 0.09019608f, 1f);
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +66,26 @@ public class Device : MonoBehaviour
             bVar.batteryPercentage -= powerRate * badConnectedNum;
         }
 
-        mText.text = currentVal.ToString();
+        TextUpdater();
 
         StartCoroutine(PowerUp());
+    }
+
+    private void TextUpdater()
+    {
+        mText.text = currentVal.ToString();
+
+        if (currentVal > 0)
+        {
+            mText.color = greenColour;
+        }
+        else if (currentVal < 0)
+        {
+            mText.color = redColour;
+        }
+        else
+        {
+            mText.color = whiteColour;
+        }
     }
 }
