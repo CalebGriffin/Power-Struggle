@@ -15,6 +15,8 @@ public class Device : MonoBehaviour
     [SerializeField] private int connectedNum;
     [SerializeField] private int badConnectedNum;
 
+    [SerializeField] private Vector3 overlapBoxCenter;
+
     [SerializeField] private LayerMask orbLayer;
     [SerializeField] private LayerMask badOrbLayer;
 
@@ -30,6 +32,8 @@ public class Device : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        overlapBoxCenter = new Vector3(transform.position.x, 0f, transform.position.z);
+
         AnimationSetup();
 
         StartCoroutine(PowerUp());
@@ -49,10 +53,10 @@ public class Device : MonoBehaviour
 
     void GetCollisions()
     {
-        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, orbLayer);
+        Collider[] hitColliders = Physics.OverlapBox(overlapBoxCenter, transform.localScale / 2, Quaternion.identity, orbLayer);
         connectedNum = hitColliders.Length;
 
-        Collider[] hitBadColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, badOrbLayer);
+        Collider[] hitBadColliders = Physics.OverlapBox(overlapBoxCenter, transform.localScale / 2, Quaternion.identity, badOrbLayer);
         badConnectedNum = hitBadColliders.Length;
         Debug.Log("Bad Connected Num: " + badConnectedNum.ToString());
     }
@@ -121,6 +125,10 @@ public class Device : MonoBehaviour
         {
             case "Camera":
                 animationName = "GrowNShrink";
+                break;
+
+            case "Blender":
+                animationName = "Blend";
                 break;
 
             default:
