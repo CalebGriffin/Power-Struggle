@@ -29,7 +29,7 @@ public class AIBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Runs the function to set the difficulty of the AI
+        // Sets the difficulty of the AI
         SetDifficulty();
     }
 
@@ -140,7 +140,7 @@ public class AIBehaviour : MonoBehaviour
             Attack(true);
         }
 
-        if (checkedOutput)
+        if (checkedOutput == true)
         {
             StartCoroutine(Connect());
         }
@@ -263,6 +263,8 @@ public class AIBehaviour : MonoBehaviour
 
             case DifficultyLevel.Medium:
                 decisionTime = 3f;
+                bVar.batteryUpWaitTime = 1f;
+                bVar.connectWaitTime = 0.8f;
 
                 attackThreshold = -8;
                 doubleAttackThreshold = -16;
@@ -272,10 +274,16 @@ public class AIBehaviour : MonoBehaviour
 
             case DifficultyLevel.Hard:
                 decisionTime = 2f;
+                bVar.batteryUpWaitTime = 1f;
+                bVar.connectWaitTime = 0.8f;
+
                 attackThreshold = -6;
                 doubleAttackThreshold = -12;
                 defenseThreshold = 6;
                 doubleDefenseThreshold = 12;
+                break;
+
+            default:
                 break;
         }
     }
