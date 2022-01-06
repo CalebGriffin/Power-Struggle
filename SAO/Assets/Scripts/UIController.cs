@@ -6,40 +6,49 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    private GameObject[] devices;
-    [SerializeField] private TextMeshProUGUI resultText;
+    private GameObject[] devices; // An array of GameObjects that store all of the devices in the level
+
+    [SerializeField] private TextMeshProUGUI resultText; // The text that tells the player whether they are winning, losing or drawing
+
+    // These are the different colours for the text
     private Color whiteColour = Color.white;
     private Color greenColour = new Color(0.1058824f, 1f, 0.03529412f, 1f);
     private Color redColour = new Color(1f, 0.1960784f, 0.09019608f, 1f);
 
-    [SerializeField] private Image timerBackground;
+    [SerializeField] private Image timerBackground; // The background of the timer
 
-    private float timePassed;
+    private float timePassed; // Float variable to store how long the game has been running
 
-    [SerializeField] private GameObject pauseCanvas;
+    [SerializeField] private GameObject pauseCanvas; // Canvas which will appear when the game is paused
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get all of the devices currently in the scene
         devices = GameObject.FindGameObjectsWithTag("Device"); 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Increase the amount of time that has passed by how long it has been since the last frame update
         timePassed += Time.deltaTime;
-        // 60 could easily be replaced with a variable for max time allowed in the level in seconds
+
+        // NOTE: 60 could easily be replaced with a variable for max time allowed in the level in seconds
         timerBackground.fillAmount = (60-timePassed) / 60; 
     }
 
+    // FixedUpdate is called 50 times per second regardless of framerate
     void FixedUpdate()
     {
+        // Calculate which player is winning based on the current values of all the devices
         int totalPower = 0;
         foreach (GameObject device in devices)
         {
             totalPower += device.GetComponent<Device>().currentVal;
         }
 
+        // Change the UI text to display whether the player is winning, losing or drawing
         switch (totalPower)
         {
             case int x when x > 0:
@@ -59,8 +68,10 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // PauseButton is called when the pause button is pressed
     public void PauseButton()
     {
+        // If the game is not already paused then stop time and display the pause menu
         if (pauseCanvas.activeSelf == false)
         {
             Time.timeScale = 0;
@@ -69,8 +80,10 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // ResumeButton is called when the resume button is pressed
     public void ResumeButton()
     {
+        // Set the time back to normal scale and hide the pause menu
         Time.timeScale = 1;
 
         pauseCanvas.SetActive(false);
