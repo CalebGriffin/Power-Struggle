@@ -40,23 +40,23 @@ public class UIController : MonoBehaviour
             totalPower += device.GetComponent<Device>().currentVal;
         }
 
-        if (totalPower > 0)
+        switch (totalPower)
         {
-            resultText.text = "WINNING";
-            resultText.color = greenColour; 
-        }
-        else if (totalPower < 0)
-        {
-            resultText.text = "LOSING";
-            resultText.color = redColour;
-        }
-        else
-        {
-            resultText.text = "DRAWING";
-            resultText.color = whiteColour;
-        }
-        
+            case int x when x > 0:
+                resultText.text = "WINNING";
+                resultText.color = greenColour; 
+                break;
 
+            case int x when x < 0:
+                resultText.text = "LOSING";
+                resultText.color = redColour;
+                break;
+
+            default:
+                resultText.text = "DRAWING";
+                resultText.color = whiteColour;
+                break;
+        }
     }
 
     public void PauseButton()
