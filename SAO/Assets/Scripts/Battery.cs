@@ -5,6 +5,7 @@ using TMPro;
 
 public class Battery : MonoBehaviour
 {
+    // A special variable to allow selecting the number or orbs that the battery has in the inspector
     public enum NumberOfOrbs
     {
         One,
@@ -13,11 +14,11 @@ public class Battery : MonoBehaviour
         Four
     };
 
-    public NumberOfOrbs numberOfOrbs;
+    public NumberOfOrbs numberOfOrbs; // Stores the number of orbs that the battery has
 
-    private Animator batteryAnim;
+    private Animator batteryAnim; // Gets reference to the Animator attached to this object
 
-    private float animTime;
+    private float animTime; // A float variable to control where in the animation the Animator should play
     
     [SerializeField] private GameObject TMProObj;
 
