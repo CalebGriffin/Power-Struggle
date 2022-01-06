@@ -216,6 +216,7 @@ public class AIBehaviour : MonoBehaviour
     private void AttackNDefend(bool checkedOutput)
     {
         Debug.Log("AI Decided to Attack and Defend!");
+        // The AI needs to get the device array and use 2 pointer variables to alternate between connecting the device with the smallest value and the device with the greatest value
     }
 
     private void Recharge()
