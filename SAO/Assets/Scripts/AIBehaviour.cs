@@ -16,8 +16,8 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] private float decisionTime; // Time waited before each AI decision
     [SerializeField] private int attackThreshold; // Used to decide if the AI should attack
     [SerializeField] private int doubleAttackThreshold; // Used to decide if the AI should attack 
-    [SerializeField] private int defenseThreshold; // Used to decide if the AI should defend
-    [SerializeField] private int doubleDefenseThreshold; // Used to decide if the AI should defend
+    [SerializeField] private int defenceThreshold; // Used to decide if the AI should defend
+    [SerializeField] private int doubleDefenceThreshold; // Used to decide if the AI should defend
 
     [SerializeField] private DifficultyLevel difficultyLevel; // The difficulty level can be set in the inspector for each level
 
@@ -65,11 +65,11 @@ public class AIBehaviour : MonoBehaviour
             totalPower += device.GetComponent<Device>().currentVal;
         }
 
-        if (totalPower <= defenseThreshold && totalPower >= doubleAttackThreshold)
+        if (totalPower <= defenceThreshold && totalPower >= doubleAttackThreshold)
         {
             Attack(false);
         }
-        else if (totalPower > defenseThreshold)
+        else if (totalPower > defenceThreshold)
         {
             Defend(false);
         }
@@ -164,7 +164,7 @@ public class AIBehaviour : MonoBehaviour
                 break;
             }
 
-            if (device.GetComponent<Device>().currentVal > doubleDefenseThreshold && orbs.Length - orbsAssigned > 1)
+            if (device.GetComponent<Device>().currentVal > doubleDefenceThreshold && orbs.Length - orbsAssigned > 1)
             {
                 orbsAssigned += 2;
 
@@ -258,8 +258,8 @@ public class AIBehaviour : MonoBehaviour
 
                 attackThreshold = -10;
                 doubleAttackThreshold = -20;
-                defenseThreshold = 10;
-                doubleDefenseThreshold = 20;
+                defenceThreshold = 10;
+                doubleDefenceThreshold = 20;
                 break;
 
             case DifficultyLevel.Medium:
@@ -269,8 +269,8 @@ public class AIBehaviour : MonoBehaviour
 
                 attackThreshold = -8;
                 doubleAttackThreshold = -16;
-                defenseThreshold = 8;
-                doubleDefenseThreshold = 16;
+                defenceThreshold = 8;
+                doubleDefenceThreshold = 16;
                 break;
 
             case DifficultyLevel.Hard:
@@ -280,8 +280,8 @@ public class AIBehaviour : MonoBehaviour
 
                 attackThreshold = -6;
                 doubleAttackThreshold = -12;
-                defenseThreshold = 6;
-                doubleDefenseThreshold = 12;
+                defenceThreshold = 6;
+                doubleDefenceThreshold = 12;
                 break;
 
             default:
