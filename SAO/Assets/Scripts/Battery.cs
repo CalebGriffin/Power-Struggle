@@ -73,16 +73,16 @@ public class Battery : MonoBehaviour
             }
         }
         
-        //if (connectedOrbs > 0)
-        //{
-            //gVar.connectedToAnything = true;
+        if (connectedOrbs > 0)
+        {
+            gVar.connectedToAnything = true;
             //rechargeCanvas.SetActive(true);
-        //}
-        //else
-        //{
-            //gVar.connectedToAnything = false;
+        }
+        else
+        {
+            gVar.connectedToAnything = false;
             //rechargeCanvas.SetActive(false);
-        //}
+        }
 
         connectedOrbs = 0;
     }
