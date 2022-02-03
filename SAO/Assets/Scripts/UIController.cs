@@ -12,7 +12,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI resultText; // The text that tells the player whether they are winning, losing or drawing
 
     [SerializeField] private GameObject numbersTextObj; // The GameObject that has the UI for the timer countdown
-    [SerializeField] private TextMeshProUGUI numbersText; // The text that tells when they are running out of time
+    [SerializeField] private TextMeshProUGUI numbersText; // The text that appears when they are running out of time
+    [SerializeField] private TextMeshProUGUI winnerText; // The text that tells the player who has won
 
     // These are the different colours for the text
     private Color whiteColour = Color.white;
@@ -21,12 +22,16 @@ public class UIController : MonoBehaviour
 
     private bool countdownAnimationStarted = false;
     private int countdownTime = 10;
+    [SerializeField] private int maxTime = 60;
 
     [SerializeField] private Image timerBackground; // The background of the timer
 
     private float timePassed; // Float variable to store how long the game has been running
 
+    [SerializeField] private GameObject creepyDanObj;
+
     [SerializeField] private GameObject pauseCanvas; // Canvas which will appear when the game is paused
+    [SerializeField] private GameObject gameOverCanvas; // Canvas which will appear when the game finishes
 
     // Start is called before the first frame update
     void Start()
@@ -44,17 +49,17 @@ public class UIController : MonoBehaviour
         // Increase the amount of time that has passed by how long it has been since the last frame update
         timePassed += Time.deltaTime;
 
-        // NOTE: 60 could easily be replaced with a variable for max time allowed in the level in seconds
-        timerBackground.fillAmount = (60-timePassed) / 60; 
+        // NOTE: maxTime could easily be replaced with a variable for max time allowed in the level in seconds
+        timerBackground.fillAmount = (maxTime - timePassed) / maxTime; 
 
-        if (60 - timePassed <= 10 && !countdownAnimationStarted)
+        if (maxTime - timePassed <= 10 && !countdownAnimationStarted)
         {
             countdownAnimationStarted = true;
             numbersTextObj.SetActive(true);
             StartCoroutine(CountdownAnim());
         }
 
-        if (timePassed >= 60)
+        if (timePassed >= maxTime && !gameOverCanvas.activeSelf)
         {
             GameOver();
         }
@@ -76,18 +81,29 @@ public class UIController : MonoBehaviour
 
     private void GameOver()
     {
-
+        if (GetTotalPower() > 0)
+        {
+            Time.timeScale = 0;
+            creepyDanObj.GetComponent<SkinnedMeshRenderer>().SetBlendShapeWeight(56, 100f);
+            winnerText.text = "You Win";
+            winnerText.color = greenColour;
+            gameOverCanvas.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            creepyDanObj.GetComponent<SkinnedMeshRenderer>().SetBlendShapeWeight(53, 100f);
+            winnerText.text = "I Win";
+            winnerText.color = redColour;
+            gameOverCanvas.SetActive(true);
+        }
     }
 
     // FixedUpdate is called 50 times per second regardless of framerate
     void FixedUpdate()
     {
         // Calculate which player is winning based on the current values of all the devices
-        int totalPower = 0;
-        foreach (GameObject device in devices)
-        {
-            totalPower += device.GetComponent<Device>().currentVal;
-        }
+        int totalPower = GetTotalPower();
 
         // Change the UI text to display whether the player is winning, losing or drawing
         switch (totalPower)
@@ -107,6 +123,16 @@ public class UIController : MonoBehaviour
                 resultText.color = whiteColour;
                 break;
         }
+    }
+
+    int GetTotalPower()
+    {
+        int totalPower = 0;
+        foreach (GameObject device in devices)
+        {
+            totalPower += device.GetComponent<Device>().currentVal;
+        }
+        return totalPower;
     }
 
     // PauseButton is called when the pause button is pressed

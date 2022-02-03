@@ -6,4 +6,5 @@ public class gVar
 {
     public static int batteryPercentage = 100;
     public static bool connectedToAnything = false;
+    public static bool backToMenuUI = false;
 }
