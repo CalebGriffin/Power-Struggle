@@ -10133,7 +10133,7 @@ MonoBehaviour:
   numbersTextObj: {fileID: 1530536071}
   numbersText: {fileID: 0}
   winnerText: {fileID: 1477312441}
-  maxTime: 15
+  maxTime: 60
   timerBackground: {fileID: 107050012}
   creepyDanObj: {fileID: 2649814285699344427}
   pauseCanvas: {fileID: 716838319}
