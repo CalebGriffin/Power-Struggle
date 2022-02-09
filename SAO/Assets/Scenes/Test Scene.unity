@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,7 +153,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2f5d7f9338fbd4c8d98c16ebede87bf7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f5d7f9338fbd4c8d98c16ebede87bf7,
         type: 3}
@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2f5d7f9338fbd4c8d98c16ebede87bf7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.04
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f5d7f9338fbd4c8d98c16ebede87bf7,
         type: 3}
@@ -297,7 +297,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7f859baaf2bbf6c4fac138961bf2a851,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f859baaf2bbf6c4fac138961bf2a851, type: 3}
@@ -507,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3684d36b11567454e8f5c44a67d36ab3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3684d36b11567454e8f5c44a67d36ab3, type: 3}
@@ -541,7 +541,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8b3d0dd99501442c6bb4242f318c850f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7
+      value: -1.26
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b3d0dd99501442c6bb4242f318c850f,
         type: 3}
@@ -551,7 +551,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8b3d0dd99501442c6bb4242f318c850f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -4.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b3d0dd99501442c6bb4242f318c850f,
         type: 3}
@@ -670,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3684d36b11567454e8f5c44a67d36ab3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3684d36b11567454e8f5c44a67d36ab3, type: 3}
@@ -819,7 +819,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c2202ed1909caf74caf8eb0981495177,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2202ed1909caf74caf8eb0981495177, type: 3}
@@ -986,7 +986,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9a5c86c0fac5f4b4ea15d9fa589e1e4a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5c86c0fac5f4b4ea15d9fa589e1e4a, type: 3}
@@ -1005,7 +1005,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 047656694f96e4ab0a8fb795790c2204,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 047656694f96e4ab0a8fb795790c2204,
         type: 3}
@@ -1015,7 +1015,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 047656694f96e4ab0a8fb795790c2204,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -4.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 047656694f96e4ab0a8fb795790c2204,
         type: 3}
