@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Sets the rotation of the Dan object in the scene when the game starts
 public class DanAnimator : MonoBehaviour
 {
     // Start is called before the first frame update

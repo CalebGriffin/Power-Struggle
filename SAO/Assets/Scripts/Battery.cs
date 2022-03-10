@@ -20,20 +20,20 @@ public class Battery : MonoBehaviour
 
     private float animTime; // A float variable to control where in the animation the Animator should play
     
-    [SerializeField] private GameObject TMProObj;
+    [SerializeField] private GameObject TMProObj; // The text object that shows the battery's current power
 
-    private TextMeshProUGUI mText;
+    private TextMeshProUGUI mText; // The actual text that shows the battery's current power
 
-    [SerializeField] private GameObject rechargeCanvas;
+    [SerializeField] private GameObject rechargeCanvas; // The canvas that stores the recharge button
 
-    [SerializeField] private GameObject orbPrefab;
+    [SerializeField] private GameObject orbPrefab; // The prefab that stores the orb object
 
-    private GameObject tempClone;
+    private GameObject tempClone; // Used to give info to a prefab that has just been spawned
 
-    private GameObject[] orbs;
+    private GameObject[] orbs; // An array to store all of the orbs
 
     // Only serialized for testing, REMOVE
-    [SerializeField] private int connectedOrbs;
+    [SerializeField] private int connectedOrbs; // The number of orbs that are currently connected to devices
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +67,14 @@ public class Battery : MonoBehaviour
     {
         foreach (GameObject orb in orbs)
         {
+            // Check all of the orbs to see if they are connected to any of the devices by checking the distance between them and the Line Renderer point
             if (Vector3.Distance(orb.GetComponent<LineRenderer>().GetPosition(1), orb.transform.position) > 0.2)
             {
                 connectedOrbs++;
             }
         }
         
+        // If any of the orbs are connected, change the gVar variable
         if (connectedOrbs > 0)
         {
             gVar.connectedToAnything = true;
@@ -84,9 +86,11 @@ public class Battery : MonoBehaviour
             //rechargeCanvas.SetActive(false);
         }
 
+        // Reset the no. of connected orbs
         connectedOrbs = 0;
     }
 
+    // Checks how many orbs the battery has and spawns the prefabs in the correct positions
     private void OrbSpawner()
     {
         switch(numberOfOrbs)
@@ -128,11 +132,13 @@ public class Battery : MonoBehaviour
         }
     }
 
+    // Finds all of the orb objects in the scene
     private void GetOrbs()
     {
         orbs = GameObject.FindGameObjectsWithTag("Orb");
     }
 
+    // A continuously looping coroutine that increases the battery's power if it isn't connected to any devices
     private IEnumerator BatteryUp()
     {
         yield return new WaitForSeconds(0.5f);
@@ -145,6 +151,7 @@ public class Battery : MonoBehaviour
         StartCoroutine(BatteryUp());
     }
 
+    // Disconnects all of the orbs from their devices and resets the Line Renderer positions by calling a function on each orb
     public void ResetOrbs()
     {
         foreach (GameObject orb in orbs)

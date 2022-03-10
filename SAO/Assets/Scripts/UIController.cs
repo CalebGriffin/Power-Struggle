@@ -49,9 +49,10 @@ public class UIController : MonoBehaviour
         // Increase the amount of time that has passed by how long it has been since the last frame update
         timePassed += Time.deltaTime;
 
-        // NOTE: maxTime could easily be replaced with a variable for max time allowed in the level in seconds
+        // Fill the timer to show how much of the time has passed
         timerBackground.fillAmount = (maxTime - timePassed) / maxTime; 
 
+        // Start the countdown if there are 10 or less seconds remaining and it hasn't already been started
         if (maxTime - timePassed <= 10 && !countdownAnimationStarted)
         {
             countdownAnimationStarted = true;
@@ -59,12 +60,14 @@ public class UIController : MonoBehaviour
             StartCoroutine(CountdownAnim());
         }
 
+        // Once the time has run out, start the game over function
         if (timePassed >= maxTime && !gameOverCanvas.activeSelf)
         {
             GameOver();
         }
     }
 
+    // A looping coroutine that triggers the animations for the countdown timer for the last 10 seconds as well as changing the text
     private IEnumerator CountdownAnim()
     {
         numbersText.text = countdownTime.ToString();
@@ -79,8 +82,10 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // Called when the time has run out on the level
     private void GameOver()
     {
+        // If the player has won then set up Dan's head to be sad and set up the end screen
         if (GetTotalPower() > 0)
         {
             Time.timeScale = 0;
@@ -89,6 +94,7 @@ public class UIController : MonoBehaviour
             winnerText.color = greenColour;
             gameOverCanvas.SetActive(true);
         }
+        // If the player has lost then set up Dan's head to be happy and set up the end screen
         else
         {
             Time.timeScale = 0;
@@ -125,6 +131,7 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // Get's the current power from all of the devices in the scene and adds them together and returns it
     int GetTotalPower()
     {
         int totalPower = 0;
