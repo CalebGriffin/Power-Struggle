@@ -8,11 +8,13 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] protected GameObject TransitionObj; // The object to animate on screen
     [SerializeField] protected float transitionTime = 0.5f; // How long should the transition take
+    protected GameObject aiObj;
 
     // When the scene loads, play the opening animation. Virtual so it can be overridden
     virtual protected void OnEnable()
     {
         TransitionObj.GetComponent<Animator>().Play("CircleWipe_End");
+        aiObj = GameObject.Find("AI");
     }
 
     // Calls the Coroutine to transition to another scene, takes the name of the scene as a parameter, public so it can be accessed by other classes
@@ -38,6 +40,7 @@ public class LevelLoader : MonoBehaviour
         if (sceneName == "Menu Scene")
         {
             gVar.backToMenuUI = true;
+            aiObj.SendMessage("ResetLevel");
         }
 
         // Load the scene using the Scene Manager and log the result for testing

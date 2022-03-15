@@ -353,4 +353,15 @@ public class AIBehaviour : MonoBehaviour
 
         devices = GameObject.FindGameObjectsWithTag("Device");
     }
+
+    // Resets all of the necessary values back when the level is finished
+    private void ResetLevel()
+    {
+        foreach (GameObject device in devices)
+        {
+            device.GetComponent<Device>().currentVal = 0;
+        }
+        gVar.batteryPercentage = 100;
+        bVar.batteryPercentage = 100;
+    }
 }
